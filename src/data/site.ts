@@ -34,8 +34,29 @@ export const site = {
   email: "guilhermenascimentosilva1@gmail.com",
   linkedin: "https://www.linkedin.com/in/guilherme-nascimento-silva",
 
-  // Deixe "" enquanto não tiver o usuário — o link some do site sozinho.
-  github: "",
+  github: "https://github.com/Hab99/portfolio",
+};
+
+/**
+ * Colofão — como o site foi feito.
+ *
+ * Transparência deliberada: declarar o uso de IA e creditar o template
+ * é postura profissional, não confissão. O termo usado é
+ * "AI-assisted development" — e não "vibe coding", que significa
+ * aceitar o que a IA gera sem revisar.
+ */
+export const colofao = {
+  stack: "Astro, Tailwind e TypeScript. Publicado na Vercel.",
+  metodo:
+    "AI-assisted development com Claude (Anthropic): direção, decisões de produto, revisão e validação minhas; implementação assistida.",
+  template: {
+    texto: "Template base",
+    href: "https://www.youtube.com/watch?v=9xVnIEKNNEE",
+  },
+  repositorio: {
+    texto: "Código no GitHub",
+    href: "https://github.com/Hab99/portfolio",
+  },
 };
 
 /** Links de contato. Entradas sem href são descartadas automaticamente. */

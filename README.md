@@ -91,10 +91,15 @@ Esse modo **não existe** no site publicado.
 
 ---
 
-## Créditos
+## Créditos e método
+
+**AI-assisted development.** Este site foi construído com assistência de IA
+(Claude, da Anthropic). Direção de produto, decisões de design, revisão e
+validação são do autor; a implementação foi assistida.
 
 Construído sobre um template de portfólio em Astro, adaptado em estrutura,
-tipografia, paleta e conteúdo.
+tipografia, paleta e conteúdo:
+https://www.youtube.com/watch?v=9xVnIEKNNEE
 
 ---
 
