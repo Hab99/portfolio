@@ -72,6 +72,13 @@ Esse modo **não existe** no site publicado.
 
 ---
 
+## Caderno de estudos
+
+Anotações técnicas sobre as decisões deste projeto — SEO técnico, dados
+estruturados e o porquê de cada escolha: **[ESTUDOS.md](ESTUDOS.md)**
+
+---
+
 ## Decisões de projeto
 
 - **Modo escuro travado.** O site não segue a preferência do sistema

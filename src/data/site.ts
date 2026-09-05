@@ -34,7 +34,10 @@ export const site = {
   email: "guilhermenascimentosilva1@gmail.com",
   linkedin: "https://www.linkedin.com/in/guilherme-nascimento-silva",
 
-  github: "https://github.com/Hab99/portfolio",
+  // Perfil, não repositório: é para cá que o visitante deve ir, e é o
+  // que o schema.org espera em sameAs (identidade, não projeto).
+  // O link do repositório deste site fica no colofão, abaixo.
+  github: "https://github.com/Hab99",
 };
 
 /**
@@ -45,6 +48,33 @@ export const site = {
  * "AI-assisted development" — e não "vibe coding", que significa
  * aceitar o que a IA gera sem revisar.
  */
+/**
+ * Dados usados nos dados estruturados (JSON-LD / schema.org).
+ *
+ * Servem para o buscador entender que esta página descreve UMA PESSOA
+ * específica — e não uma coincidência de palavras. É o que ajuda o
+ * Google a te tratar como entidade quando alguém pesquisa seu nome.
+ */
+export const perfil = {
+  cargoCurto: "Desenvolvedor RPA",
+  cidade: "São Paulo",
+  estado: "SP",
+  pais: "BR",
+  empresaAtual: "e-Xyon",
+  formacao: "Senac São Paulo",
+  // Assuntos que você domina — vira o campo knowsAbout do schema.
+  competencias: [
+    "Python",
+    "Automação de processos (RPA)",
+    "Selenium",
+    "Playwright",
+    "Web scraping",
+    "OCR",
+    "Pandas",
+    "Integração de sistemas",
+  ],
+};
+
 export const colofao = {
   stack: "Astro, Tailwind e TypeScript. Publicado na Vercel.",
   metodo:

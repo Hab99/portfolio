@@ -1,0 +1,94 @@
+---
+/**
+ * Dados estruturados (JSON-LD, vocabulário schema.org).
+ *
+ * As meta tags descrevem A PÁGINA. Os dados estruturados descrevem
+ * A ENTIDADE: "esta página é sobre uma Pessoa chamada Guilherme, de
+ * profissão X, com estes perfis". É o que permite ao buscador ligar o
+ * nome a uma identidade em vez de tratá-lo como texto solto.
+ *
+ * Emitimos três coisas:
+ *   ProfilePage + Person  -> quem é o dono do site
+ *   WebSite               -> o site em si
+ *   BreadcrumbList        -> a trilha, só nas páginas internas
+ *
+ * O campo `@id` amarra os nós entre si: o Person referenciado pelo
+ * ProfilePage e pelo WebSite é o MESMO, não três pessoas diferentes.
+ */
+import { site, perfil } from "@/data/site";
+
+interface Props {
+  /** Trilha de navegação; só nas páginas internas. */
+  breadcrumb?: { nome: string; url: string }[];
+}
+
+const { breadcrumb } = Astro.props;
+
+const base = (Astro.site ?? new URL(site.url)).href.replace(/\/$/, "");
+const idPessoa = `${base}/#pessoa`;
+const idSite = `${base}/#site`;
+
+// sameAs é como o buscador confirma que os perfis são da mesma pessoa.
+const perfis = [site.linkedin, site.github].filter(Boolean);
+
+const pessoa = {
+  "@type": "Person",
+  "@id": idPessoa,
+  name: site.nome,
+  url: base,
+  jobTitle: perfil.cargoCurto,
+  email: `mailto:${site.email}`,
+  description: site.descricao,
+  image: `${base}${site.ogImage}`,
+  sameAs: perfis,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: perfil.cidade,
+    addressRegion: perfil.estado,
+    addressCountry: perfil.pais,
+  },
+  worksFor: { "@type": "Organization", name: perfil.empresaAtual },
+  alumniOf: { "@type": "EducationalOrganization", name: perfil.formacao },
+  knowsAbout: perfil.competencias,
+};
+
+const grafo: Record<string, unknown>[] = [
+  {
+    "@type": "WebSite",
+    "@id": idSite,
+    url: base,
+    name: site.nome,
+    inLanguage: "pt-BR",
+    publisher: { "@id": idPessoa },
+  },
+  {
+    "@type": "ProfilePage",
+    "@id": `${base}/#pagina`,
+    url: base,
+    name: `${site.nome} — ${site.cargo}`,
+    isPartOf: { "@id": idSite },
+    about: { "@id": idPessoa },
+    mainEntity: { "@id": idPessoa },
+  },
+  pessoa,
+];
+
+if (breadcrumb?.length) {
+  grafo.push({
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumb.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.nome,
+      item: item.url,
+    })),
+  });
+}
+
+const jsonLd = { "@context": "https://schema.org", "@graph": grafo };
+
+// Escapa "<" para que nenhum valor consiga fechar a tag <script>.
+const conteudo = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
+---
+
+<script type="application/ld+json" is:inline set:html={conteudo} />

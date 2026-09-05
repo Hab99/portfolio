@@ -2,6 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import CaseDetail from "@/components/landing/CaseDetail.astro";
 import { getProjectItem, projectItems } from "@/data/portfolio";
+import { site } from "@/data/site";
 
 export function getStaticPaths() {
   return projectItems.map((item) => ({
@@ -15,9 +16,15 @@ const item = getProjectItem(slug!);
 if (!item) {
   return Astro.redirect("/404");
 }
+const base = (Astro.site ?? new URL(site.url)).href.replace(/\/$/, "");
+const breadcrumb = [
+  { nome: "Início", url: `${base}/` },
+  { nome: "Projetos", url: `${base}/#projetos` },
+  { nome: item.title, url: `${base}/projeto/${item.slug}/` },
+];
 ---
 
-<BaseLayout title={item.title} description={item.description}>
+<BaseLayout {breadcrumb} title={item.title} description={item.description}>
   <CaseDetail
     item={item}
     contentPrefix={`projects.${item.slug}`}
