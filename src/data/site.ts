@@ -25,6 +25,11 @@ export const site = {
     "Construo robôs que navegam portais bancários, extraem documentos em " +
     "lote e integram sistemas que não conversam entre si.",
 
+  // --- Verificação de propriedade no Google Search Console ---
+  // Prova ao Google que o site é seu. Não é segredo: fica visível no
+  // HTML de qualquer página. Só some se a propriedade for removida lá.
+  verificacaoGoogle: "_cgfpdObkVsot10cM_k-kr0PPNRYTTziqqcuHtAQgck",
+
   // --- Imagem do preview de link (1200x630) ---
   ogImage: "/og-image.png",
 
