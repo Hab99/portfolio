@@ -1,0 +1,52 @@
+---
+/**
+ * Metadados de SEO e de preview de link (Open Graph).
+ *
+ * Cada página passa seu próprio título e descrição. O que não for
+ * passado cai no padrão definido em src/data/site.ts.
+ *
+ * A URL canônica é calculada a partir do endereço real da página —
+ * não existe mais URL escrita na mão, então nada fica desatualizado.
+ */
+import { site } from "@/data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
+
+// Título da aba: "Seção — Nome" na interna, só o nome na home.
+const tituloFinal = title ? `${title} — ${site.nome}` : `${site.nome} — ${site.cargo}`;
+const descricaoFinal = description ?? site.descricao;
+
+// Astro.site vem do astro.config.mjs; Astro.url é a página atual.
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url);
+const imagemAbsoluta = new URL(image ?? site.ogImage, Astro.site ?? site.url);
+---
+
+<title>{tituloFinal}</title>
+<meta name="description" content={descricaoFinal} />
+<meta name="author" content={site.nome} />
+<link rel="canonical" href={canonical.href} />
+
+<!-- Open Graph — é isto que gera o card ao colar o link no LinkedIn/WhatsApp -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonical.href} />
+<meta property="og:title" content={tituloFinal} />
+<meta property="og:description" content={descricaoFinal} />
+<meta property="og:image" content={imagemAbsoluta.href} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={`${site.nome} — ${site.cargo}`} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:site_name" content={site.nome} />
+<meta property="og:locale" content="pt_BR" />
+
+<!-- Twitter/X — usa as mesmas informações -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={tituloFinal} />
+<meta name="twitter:description" content={descricaoFinal} />
+<meta name="twitter:image" content={imagemAbsoluta.href} />

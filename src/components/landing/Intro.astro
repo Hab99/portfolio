@@ -1,0 +1,83 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { getContent } from "@/lib/getContent";
+import { site } from "@/data/site";
+
+/**
+ * Primeira dobra. Decide se a pessoa continua ou fecha a aba,
+ * então responde em uma frase: quem é e qual problema resolve.
+ *
+ * Segue o mesmo eixo do resto da página:
+ *   coluna 1    -> metadado (nome, em mono)
+ *   colunas 2-4 -> conteúdo
+ */
+const introDefault =
+  "Automatizo processos que travam equipes: portais bancários, documentos em lote e sistemas que não conversam entre si.";
+---
+
+<section>
+  <Wrapper variant="standard" class="pb-8 pt-40 lg:pt-64">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-8 items-baseline">
+      <!-- Nome: visível para quem lê e para o Google. -->
+      <div>
+        <Text
+          tag="p"
+          variant="textXS"
+          class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+        >
+          {site.nome}
+        </Text>
+        <!-- Filete de destaque: âncora visual da marca. -->
+        <div class="mt-4 h-px w-12 bg-accent-500" aria-hidden="true"></div>
+      </div>
+
+      <div class="lg:col-span-3">
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="font-semibold leading-[1.15] text-left tracking-tighter text-base-900 dark:text-white max-w-4xl"
+          data-editable="intro.text"
+        >
+          {getContent("intro.text", introDefault)}
+        </Text>
+
+        <Text
+          tag="p"
+          variant="textBase"
+          class="mt-8 max-w-xl text-base-600 dark:text-base-300"
+        >
+          Desenvolvedor Python com foco em automação de processos (RPA).
+          Robôs em produção numa operação de gestão jurídica BPO — e uma base
+          de três anos dentro da própria operação que hoje eu automatizo.
+        </Text>
+
+        <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+          <a
+            href="#projetos"
+            class="font-mono text-xs uppercase tracking-wide text-base-900 dark:text-white underline underline-offset-8 decoration-accent-500 decoration-2 transition-colors hover:text-accent-700 dark:hover:text-accent-400"
+          >
+            Ver projetos
+          </a>
+          <a
+            href="#contato"
+            class="font-mono text-xs uppercase tracking-wide text-base-500 dark:text-base-400 transition-colors hover:text-accent-700 dark:hover:text-accent-400"
+          >
+            Entrar em contato
+          </a>
+
+          <!-- Selo de disponibilidade: você está procurando, isso joga a favor. -->
+          <span
+            class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-base-500 dark:text-base-400"
+          >
+            <span
+              class="ponto-disponivel inline-block size-1.5 rounded-full bg-accent-500"
+              aria-hidden="true"></span>
+            Disponível para oportunidades
+          </span>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

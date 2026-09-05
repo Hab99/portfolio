@@ -1,0 +1,36 @@
+---
+// Assets
+import Logo from "@/components/assets/Logo.astro";
+// Foundations
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { contatos } from "@/data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="py-6">
+  <Wrapper variant="standard" class="py-2">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-start">
+      <div
+        class="flex items-center gap-2 text-base-600 dark:text-base-300 text-xs tracking-tight"
+      >
+        {year}
+        <Logo />
+      </div>
+      <div class="flex flex-wrap gap-8 text-sm items-center">
+        {
+          contatos.map((link) => (
+            <a
+              href={link.href}
+              target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+              rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+              class="text-base-600 text-xs tracking-tight transition-colors hover:text-accent-700 dark:text-base-300 dark:hover:text-accent-400"
+            >
+              {link.texto}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</footer>

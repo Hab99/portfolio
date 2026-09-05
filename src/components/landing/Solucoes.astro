@@ -1,0 +1,86 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+/**
+ * "O que eu resolvo" — os três problemas que o Guilherme ataca.
+ *
+ * Vem logo depois da primeira dobra porque responde a pergunta que o
+ * recrutador faz antes de olhar projeto: "esse cara serve pra quê?".
+ */
+const pilares = [
+  {
+    numero: "01",
+    titulo: "Portais sem API",
+    texto:
+      "Quando o sistema não oferece integração, a interface vira a porta de entrada. Automação de portais bancários e sistemas web com Selenium e Playwright, isolando navegação de regra de negócio para o robô não quebrar a cada mudança de layout.",
+  },
+  {
+    numero: "02",
+    titulo: "Documentos em escala",
+    texto:
+      "Extração, leitura e classificação de documentos em lote com OCR e parsing resiliente. Transformo PDF e imagem em dado estruturado que o processo seguinte consegue consumir.",
+  },
+  {
+    numero: "03",
+    titulo: "Sistemas que não conversam",
+    texto:
+      "Integração entre ambientes sem ponto de conexão nativo — incluindo Citrix e outros ambientes virtualizados, onde não há DOM e a tela é a única fonte de verdade.",
+  },
+];
+---
+
+<section class="scroll-mt-32" id="solucoes">
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 items-baseline">
+      <Text
+        tag="p"
+        variant="textXS"
+        class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+      >
+        Atuação
+      </Text>
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="font-semibold leading-tight tracking-tighter lg:col-span-3 text-base-900 dark:text-white"
+      >
+        O que eu resolvo
+      </Text>
+    </div>
+
+    <div class="mt-12 border-t border-base-200 dark:border-base-800">
+      {
+        pilares.map((pilar) => (
+          <article class="border-b border-base-200 dark:border-base-800 py-10">
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 items-baseline">
+              <Text
+                tag="p"
+                variant="textXS"
+                class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+              >
+                {pilar.numero}
+              </Text>
+
+              <Text
+                tag="h3"
+                variant="displayXS"
+                class="font-semibold leading-tight tracking-tight text-base-900 dark:text-white"
+              >
+                {pilar.titulo}
+              </Text>
+
+              <Text
+                tag="p"
+                variant="textSM"
+                class="lg:col-span-2 max-w-prose text-base-600 dark:text-base-300"
+              >
+                {pilar.texto}
+              </Text>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

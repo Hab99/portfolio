@@ -1,0 +1,74 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+/**
+ * Stack agrupada por papel, não em lista solta.
+ *
+ * O último grupo ("Em expansão") é onde o eixo de back-end aparece sem
+ * competir com a headline de automação — e sem afirmar domínio que ainda
+ * não é defensável numa entrevista.
+ */
+const grupos = [
+  {
+    titulo: "Automação",
+    itens: ["Python", "Selenium", "Playwright", "PyAutoGUI", "PyWinAuto", "Citrix / VDI"],
+  },
+  {
+    titulo: "Dados e documentos",
+    itens: ["Pandas", "OpenPyXL", "Tesseract OCR", "Regex", "Web scraping", "Pathlib"],
+  },
+  {
+    titulo: "Engenharia",
+    itens: ["POO", "SOLID", "Strategy", "Template Method", "Git", "pytest"],
+  },
+  {
+    titulo: "Em expansão",
+    itens: ["FastAPI", "PostgreSQL", "Docker", "CI/CD", "APIs REST"],
+  },
+];
+---
+
+<section class="scroll-mt-32" id="stack">
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 items-baseline">
+      <Text
+        tag="p"
+        variant="textXS"
+        class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+      >
+        Ferramentas
+      </Text>
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="font-semibold leading-tight tracking-tighter lg:col-span-3 text-base-900 dark:text-white"
+      >
+        Stack
+      </Text>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 gap-10 border-t border-base-200 pt-10 dark:border-base-800 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+      {
+        grupos.map((grupo) => (
+          <div>
+            <Text
+              tag="h3"
+              variant="textXS"
+              class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+            >
+              {grupo.titulo}
+            </Text>
+            <ul class="mt-4 flex flex-col gap-2">
+              {grupo.itens.map((item) => (
+                <li class="text-sm tracking-tight text-base-900 dark:text-white">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

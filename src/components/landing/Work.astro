@@ -1,0 +1,100 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { workItems } from "@/data/portfolio";
+import { getContent } from "@/lib/getContent";
+
+/**
+ * EIXO DA PÁGINA (vale para todas as seções):
+ *   coluna 1     -> metadado (rótulo da seção, ano)
+ *   colunas 2-3  -> conteúdo (título e texto)
+ *   coluna 4     -> categoria, alinhada à direita
+ *
+ * HIERARQUIA: h2 de seção (displayMD) > h3 de card (displayXS).
+ * Antes o card era maior que a seção, o que quebrava a leitura.
+ *
+ * Sem imagens: os cases são sob NDA e não haverá print real.
+ * Card tipográfico comunica melhor do que placeholder cinza repetido.
+ */
+const workEyebrowDefault = "Trajetória";
+---
+
+<section class="scroll-mt-32" id="trabalho">
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 items-baseline">
+      <Text
+        tag="p"
+        variant="textXS"
+        class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+        data-editable="sections.work.eyebrow"
+        >{getContent("sections.work.eyebrow", workEyebrowDefault)}</Text
+      >
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="font-semibold leading-tight tracking-tighter lg:col-span-3 text-base-900 dark:text-white"
+        data-editable="sections.work.title"
+      >
+        {getContent("sections.work.title", "Trabalho")}
+      </Text>
+    </div>
+
+    <div class="mt-12 border-t border-base-200 dark:border-base-800">
+      {
+        workItems.map((project) => (
+          <a
+            href={`/trabalho/${project.slug}`}
+            class="group block border-b border-base-200 dark:border-base-800 py-10 transition-colors hover:bg-base-50 dark:hover:bg-base-900/40"
+          >
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 items-baseline">
+              <Text
+                tag="p"
+                variant="textXS"
+                class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+                data-editable={`work.${project.slug}.year`}
+              >
+                {getContent(`work.${project.slug}.year`, project.year)}
+              </Text>
+
+              <div class="lg:col-span-2">
+                <Text
+                  tag="h3"
+                  variant="displayXS"
+                  class="font-semibold leading-tight tracking-tight text-base-900 dark:text-white transition-colors group-hover:text-accent-700 dark:group-hover:text-accent-400"
+                  data-editable={`work.${project.slug}.title`}
+                >
+                  {getContent(`work.${project.slug}.title`, project.title)}
+                </Text>
+                <Text
+                  tag="p"
+                  variant="textSM"
+                  class="mt-3 max-w-prose text-base-600 dark:text-base-300"
+                  data-editable={`work.${project.slug}.description`}
+                >
+                  {getContent(`work.${project.slug}.description`, project.description)}
+                </Text>
+              </div>
+
+              <div class="flex items-baseline gap-3 lg:justify-end">
+                <Text
+                  tag="p"
+                  variant="textXS"
+                  class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+                  data-editable={`work.${project.slug}.category`}
+                >
+                  {getContent(`work.${project.slug}.category`, project.category)}
+                </Text>
+                <span
+                  aria-hidden="true"
+                  class="text-base-400 transition-transform duration-300 group-hover:translate-x-1 dark:text-base-400"
+                >
+                  →
+                </span>
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

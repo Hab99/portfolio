@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "tailwind-scrollbar-hide";
+
+/* Modo escuro travado: nao segue a preferencia do sistema.
+   O site e escuro para todo visitante, como foi projetado. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Typography */
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* accent — azul Paramount (#0064FF em accent-500) */
+  --color-accent-50: oklch(0.972 0.018 261.1);
+  --color-accent-100: oklch(0.942 0.040 261.1);
+  --color-accent-200: oklch(0.892 0.078 261.1);
+  --color-accent-300: oklch(0.828 0.130 261.1);
+  --color-accent-400: oklch(0.720 0.194 261.1);
+  --color-accent-500: oklch(0.560 0.243 261.1);
+  --color-accent-600: oklch(0.492 0.244 261.1);
+  --color-accent-700: oklch(0.424 0.212 261.1);
+  --color-accent-800: oklch(0.366 0.176 261.1);
+  --color-accent-900: oklch(0.318 0.142 261.1);
+  --color-accent-950: oklch(0.228 0.098 261.1);
+  /* base*/
+  --color-base-50: oklch(0.985 0 0);
+  --color-base-100: oklch(0.97 0 0);
+  --color-base-200: oklch(0.922 0 0);
+  --color-base-300: oklch(0.87 0 0);
+  --color-base-400: oklch(0.708 0 0);
+  --color-base-500: oklch(0.556 0 0);
+  --color-base-600: oklch(0.439 0 0);
+  --color-base-700: oklch(0.371 0 0);
+  --color-base-800: oklch(0.269 0 0);
+  --color-base-900: oklch(0.205 0 0);
+  --color-base-950: oklch(0.145 0 0);
+}
+
+body.edit-mode-active [data-editable] {
+  outline: 1px dashed color-mix(in oklab, var(--color-accent-500) 70%, transparent);
+  outline-offset: 4px;
+  border-radius: 2px;
+  transition: outline-color 0.2s ease, background-color 0.2s ease;
+}
+
+body.edit-mode-active [data-editable]:focus {
+  outline: 2px solid var(--color-accent-500);
+  background-color: color-mix(in oklab, var(--color-accent-500) 8%, transparent);
+}
+
+body.edit-mode-active a:not([data-editable]):not([data-editable-link]),
+body.edit-mode-active [data-portfolio-media] {
+  pointer-events: none;
+}
+
+body.edit-mode-active [data-editable-link] {
+  pointer-events: auto;
+}
+
+body.edit-mode-active .editable-link-trigger {
+  display: inline-flex;
+  pointer-events: auto;
+}
+
+body.edit-mode-active [data-editable-image] {
+  cursor: pointer;
+  outline: 1px dashed color-mix(in oklab, var(--color-accent-500) 70%, transparent);
+  outline-offset: 4px;
+}
+
+body.edit-mode-active [data-editable-image],
+body.edit-mode-active .editable-image {
+  pointer-events: auto;
+}
+
+body.edit-mode-active .editable-image-badge {
+  display: flex;
+}
+
+.scroll-word-wrap {
+  padding-bottom: 0.08em;
+}
+
+.scroll-word {
+  will-change: transform, opacity, filter;
+}
+
+/* --- Selo de disponibilidade -------------------------------------------- */
+/* Ponto pulsante do "Disponível para oportunidades". Respeita quem
+   pediu menos movimento no sistema operacional (acessibilidade). */
+@keyframes pulso-disponivel {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+}
+
+.ponto-disponivel {
+  animation: pulso-disponivel 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ponto-disponivel {
+    animation: none;
+  }
+}
+
+/* --- Base escura ---------------------------------------------------------- */
+/* color-scheme avisa o navegador para pintar barra de rolagem, campos de
+   formulario e o fundo antes do CSS carregar ja no escuro. */
+:root {
+  color-scheme: dark;
+  background-color: var(--color-base-950);
+}

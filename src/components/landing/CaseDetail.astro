@@ -1,0 +1,172 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import type { PortfolioCase } from "@/data/portfolio";
+import { getContent } from "@/lib/getContent";
+
+/**
+ * Página de detalhe de um case.
+ *
+ * Sem imagens: os projetos são sob NDA e não haverá print real. O
+ * template original repetia o mesmo placeholder cinza 4 vezes por página.
+ *
+ * Mesmo eixo do resto do site:
+ *   coluna 1    -> metadado (ano, número do bloco, nota lateral)
+ *   colunas 2-3 -> conteúdo
+ *   coluna 4    -> ficha técnica
+ */
+
+interface Props {
+  item: PortfolioCase;
+  contentPrefix: string;
+  backHref: string;
+  backLabel: string;
+  eyebrow: string;
+}
+
+const { item, contentPrefix, backHref, backLabel, eyebrow } = Astro.props;
+
+const key = (suffix: string) => `${contentPrefix}.${suffix}`;
+---
+
+<section class="pb-16 pt-32 lg:pb-32 lg:pt-40">
+  <Wrapper variant="standard">
+    <a
+      href={backHref}
+      class="font-mono text-xs uppercase tracking-wide text-base-500 transition-colors hover:text-accent-700 dark:text-base-400 dark:hover:text-accent-400"
+    >
+      ← {backLabel}
+    </a>
+
+    <!-- Cabeçalho do case -->
+    <div
+      class="mt-10 grid grid-cols-1 gap-8 border-b border-base-200 pb-12 dark:border-base-800 lg:mt-14 lg:grid-cols-4 lg:items-baseline lg:gap-8"
+    >
+      <div>
+        <Text
+          tag="p"
+          variant="textXS"
+          class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+          data-editable={key("year")}
+        >
+          {getContent(key("year"), item.year)}
+        </Text>
+        <div class="mt-4 h-px w-12 bg-accent-500" aria-hidden="true"></div>
+      </div>
+
+      <div class="lg:col-span-2">
+        <Text
+          tag="h1"
+          variant="displayMD"
+          class="font-semibold leading-tight tracking-tighter text-base-900 dark:text-white"
+          data-editable={key("title")}
+        >
+          {getContent(key("title"), item.title)}
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="mt-6 max-w-prose text-base-600 dark:text-base-300"
+          data-editable={key("summary")}
+        >
+          {getContent(key("summary"), item.detail.summary)}
+        </Text>
+      </div>
+
+      <!-- Ficha técnica -->
+      <aside
+        class="flex flex-col gap-6 border-t border-base-200 pt-6 dark:border-base-800 lg:border-t-0 lg:pt-0"
+      >
+        <Text
+          tag="p"
+          variant="textXS"
+          class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+          data-editable={key("category")}
+        >
+          {getContent(key("category"), item.category)}
+        </Text>
+        {
+          item.detail.meta.map((entry, index) => (
+            <div>
+              <Text
+                tag="p"
+                variant="textXS"
+                class="font-mono uppercase tracking-wide text-base-400 dark:text-base-400"
+                data-editable={key(`meta.${index}.label`)}
+              >
+                {getContent(key(`meta.${index}.label`), entry.label)}
+              </Text>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="mt-1 text-base-800 dark:text-base-200"
+                data-editable={key(`meta.${index}.value`)}
+              >
+                {getContent(key(`meta.${index}.value`), entry.value)}
+              </Text>
+            </div>
+          ))
+        }
+      </aside>
+    </div>
+
+    <!-- Blocos: Contexto / Processo / Resultado -->
+    <div>
+      {
+        item.detail.blocks.map((bloco, index) => (
+          <section class="border-b border-base-200 py-12 dark:border-base-800 lg:py-16">
+            <div class="grid grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-8 lg:items-baseline">
+              <div>
+                <Text
+                  tag="p"
+                  variant="textXS"
+                  class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+                >
+                  {eyebrow} {String(index + 1).padStart(2, "0")}
+                </Text>
+              </div>
+
+              <div class="lg:col-span-2">
+                <Text
+                  tag="h2"
+                  variant="displayXS"
+                  class="font-semibold leading-tight tracking-tight text-base-900 dark:text-white"
+                  data-editable={key(`blocks.${index}.heading`)}
+                >
+                  {getContent(key(`blocks.${index}.heading`), bloco.heading)}
+                </Text>
+                <Text
+                  tag="p"
+                  variant="textSM"
+                  class="mt-4 max-w-prose text-base-600 dark:text-base-300"
+                  data-editable={key(`blocks.${index}.text`)}
+                >
+                  {getContent(key(`blocks.${index}.text`), bloco.text)}
+                </Text>
+              </div>
+
+              {/* Nota lateral: destacada por um filete, não por caixa. */}
+              <Text
+                tag="p"
+                variant="textSM"
+                class="border-l-2 border-accent-500 pl-4 text-base-500 dark:text-base-400"
+                data-editable={key(`blocks.${index}.aside`)}
+              >
+                {getContent(key(`blocks.${index}.aside`), bloco.aside)}
+              </Text>
+            </div>
+          </section>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 lg:mt-16">
+      <a
+        href={backHref}
+        class="font-mono text-xs uppercase tracking-wide text-base-500 transition-colors hover:text-accent-700 dark:text-base-400 dark:hover:text-accent-400"
+      >
+        ← {backLabel}
+      </a>
+    </div>
+  </Wrapper>
+</section>

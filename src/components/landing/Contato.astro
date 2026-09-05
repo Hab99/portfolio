@@ -1,0 +1,99 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { site } from "@/data/site";
+
+/**
+ * Seção de contato — destino do link "Contato" do menu.
+ *
+ * Mostra o ENDEREÇO, não o rótulo: recrutador quer ler e copiar o e-mail,
+ * não descobrir para onde a palavra "E-mail" leva.
+ *
+ * O telefone fica de fora de propósito: página pública com número exposto
+ * vira alvo de spam. E-mail e LinkedIn dão o mesmo acesso.
+ */
+
+// Handle do LinkedIn sem o "https://www.linkedin.com/in/" na frente.
+const handleLinkedin = site.linkedin.replace(/^https?:\/\/(www\.)?/, "");
+
+const canais = [
+  { rotulo: "E-mail", valor: site.email, href: `mailto:${site.email}` },
+  { rotulo: "LinkedIn", valor: handleLinkedin, href: site.linkedin },
+  ...(site.github
+    ? [
+        {
+          rotulo: "GitHub",
+          valor: site.github.replace(/^https?:\/\/(www\.)?/, ""),
+          href: site.github,
+        },
+      ]
+    : []),
+];
+---
+
+<section class="scroll-mt-32" id="contato">
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 items-baseline">
+      <Text
+        tag="p"
+        variant="textXS"
+        class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+      >
+        Contato
+      </Text>
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="font-semibold leading-tight tracking-tighter lg:col-span-3 text-base-900 dark:text-white"
+      >
+        Vamos conversar
+      </Text>
+    </div>
+
+    <div class="mt-12 border-t border-base-200 dark:border-base-800 pt-10">
+      <div class="grid grid-cols-1 gap-10 lg:grid-cols-4 lg:gap-8">
+        <div class="lg:col-span-2">
+          <Text
+            tag="p"
+            variant="displayXS"
+            class="max-w-md font-semibold leading-snug tracking-tight text-base-900 dark:text-white"
+          >
+            Aberto a oportunidades em automação, Python e engenharia de software.
+          </Text>
+          <Text
+            tag="p"
+            variant="textXS"
+            class="mt-6 font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+          >
+            {site.local}
+          </Text>
+        </div>
+
+        <!-- Endereços visíveis: dá para ler, copiar e clicar. -->
+        <div class="lg:col-span-2 flex flex-col gap-6">
+          {
+            canais.map((canal) => (
+              <div>
+                <Text
+                  tag="p"
+                  variant="textXS"
+                  class="font-mono uppercase tracking-wide text-base-400 dark:text-base-400"
+                >
+                  {canal.rotulo}
+                </Text>
+                <a
+                  href={canal.href}
+                  target={canal.href.startsWith("mailto:") ? undefined : "_blank"}
+                  rel={canal.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                  class="mt-1 inline-block break-all font-mono text-sm text-base-900 underline decoration-base-300 underline-offset-4 transition-colors hover:text-accent-700 hover:decoration-accent-500 dark:text-white dark:decoration-base-700 dark:hover:text-accent-400"
+                >
+                  {canal.valor}
+                </a>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>
