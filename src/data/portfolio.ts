@@ -165,8 +165,8 @@ export const projectItems: PortfolioCase[] = [
     year: "2025",
     title: "RPA de desktop com retorno visual",
     description:
-      "Robô que dirige uma aplicação de terminal isolada, lê o desfecho pela tela e devolve o resultado a uma API. A demonstração roda inteira em qualquer Windows, sem depender de nenhum serviço externo.",
-    category: "Python · PowerShell · PyAutoGUI",
+      "Robô que dirige uma aplicação isolada dentro de uma sessão Citrix, lê o desfecho pela tela e devolve o resultado a uma API. A demonstração pública roda inteira em qualquer Windows, sem depender de nenhum serviço externo.",
+    category: "Python · PowerShell · Citrix/VDI",
     repo: "https://github.com/Hab99/rpa-desktop-canal-visual",
     imagem: "/rpa-desktop-arquitetura.webp",
     detail: {
@@ -175,15 +175,16 @@ export const projectItems: PortfolioCase[] = [
       meta: [
         { label: "Papel", value: "Projeto autoral: arquitetura, código e testes" },
         { label: "Stack", value: "Python, PowerShell, PyAutoGUI, reconhecimento de imagem" },
+        { label: "Ambiente alvo", value: "Sessão Citrix em produção; a demonstração pública roda em PowerShell local" },
         { label: "Testes", value: "52 testes, sem tela e sem teclado" },
         { label: "Licença", value: "MIT, código aberto para avaliação" },
       ],
       blocks: [
         {
           heading: "Contexto",
-          text: "Às vezes a aplicação que precisa ser automatizada roda num ambiente sem API, sem banco acessível, sem pasta compartilhada e sem porta aberta: uma sessão remota, um terminal legado. Não existe canal de integração. Só existe a imagem que ela desenha na tela.",
+          text: "Às vezes a aplicação que precisa ser automatizada roda num ambiente sem API, sem banco acessível, sem pasta compartilhada e sem porta aberta. Em produção, o alvo desta técnica roda dentro de uma sessão Citrix: ambiente virtualizado, onde não há DOM para inspecionar e o sistema de arquivos fica do outro lado. Não existe canal de integração. Só existe a imagem que a aplicação desenha na tela.",
           aside:
-            "Quando não há integração possível, a interface deixa de ser detalhe de apresentação e passa a ser a única superfície de contato.",
+            "Quando não há integração possível, a interface deixa de ser detalhe de apresentação e passa a ser a única superfície de contato. A demonstração pública roda em PowerShell local, para ser executável sem um ambiente Citrix.",
         },
         {
           heading: "Processo",
