@@ -162,7 +162,7 @@ export const workItems: PortfolioCase[] = [
 export const projectItems: PortfolioCase[] = [
   {
     slug: "rpa-desktop-canal-visual",
-    year: "2026",
+    year: "2025",
     title: "RPA de desktop com retorno visual",
     description:
       "Robô que dirige uma aplicação de terminal isolada, lê o desfecho pela tela e devolve o resultado a uma API. A demonstração roda inteira em qualquer Windows, sem depender de nenhum serviço externo.",
