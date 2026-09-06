@@ -38,6 +38,10 @@ export type PortfolioCase = {
   description: string;
   category: string;
   detail: CaseDetail;
+  /** Repositório público. Quando existe, o case ganha o link e o selo. */
+  repo?: string;
+  /** Diagrama de arquitetura, exibido só na página do case. */
+  imagem?: string;
 };
 
 export const workItems: PortfolioCase[] = [
@@ -156,6 +160,46 @@ export const workItems: PortfolioCase[] = [
 ];
 
 export const projectItems: PortfolioCase[] = [
+  {
+    slug: "extrator-documentos-lote",
+    year: "2026",
+    title: "Extrator de documentos em lote",
+    description:
+      "Framework de automação web que lê uma planilha, coleta os documentos de cada registro em um portal e devolve um relatório consolidado, sem perder trabalho quando a execução falha no meio.",
+    category: "Python · Playwright · pytest",
+    repo: "https://github.com/Hab99/rpa-extrator-lote",
+    imagem: "/extrator-lote-arquitetura.webp",
+    detail: {
+      summary:
+        "Reimplementação pública e independente dos padrões de resiliência que uso em produção. Escrita do zero, sem código, seletor ou dado de nenhum cliente.",
+      meta: [
+        { label: "Papel", value: "Projeto autoral: arquitetura, código e testes" },
+        { label: "Stack", value: "Python, Playwright, pytest, Pandas, OpenPyXL" },
+        { label: "Testes", value: "93 testes, 2,45s, sem abrir navegador" },
+        { label: "Licença", value: "MIT, código aberto para avaliação" },
+      ],
+      blocks: [
+        {
+          heading: "Contexto",
+          text: "Um lote de milhares de linhas roda por horas. Nesse tempo, queda de rede, sessão derrubada pelo portal e interrupção manual não são exceção: são parte da operação. O problema real não é clicar em tela, e sim não perder o trabalho já feito quando algo quebra na linha 3.000.",
+          aside:
+            "O foco do projeto não é só automatizar a navegação. É garantir também que nenhuma execução termine sem resposta.",
+        },
+        {
+          heading: "Processo",
+          text: "A garantia central é um Template Method cujo bloco `finally` sempre salva o relatório: terminando bem, quebrando no meio ou recebendo Ctrl+C, o que já foi processado é gravado e o que ficou de fora sai marcado com o motivo. A arquitetura tem duas hierarquias paralelas, uma dona do navegador e outra dona do laço sobre as linhas, então trocar de portal significa escrever uma única classe. Uma guarda contra pares repetidos evita rebaixar o mesmo conjunto: numa remessa com registros duplicados, ela cortou 347 downloads para 106 arquivos únicos.",
+          aside:
+            "Distinguir 'tela que não carregou' de 'tela vazia' evita o pior erro possível aqui: marcar como não localizado um documento que estava lá. Erro silencioso é o mais caro.",
+        },
+        {
+          heading: "Resultado",
+          text: "Os padrões deste repositório vêm de um RPA de extração documental que mantenho em produção, processando cerca de 4.700 documentos por dia. Feito à mão, esse volume consumiria a jornada inteira de uma equipe apenas nesta etapa. Aqui os padrões foram reescritos do zero para serem públicos: a suíte de 93 testes roda em 2,45 segundos porque o Playwright é mockado por completo, o que permite testar toda a lógica de orquestração sem depender do portal estar no ar.",
+          aside:
+            "Estado atual: núcleo, regras de lote e testes completos. O robô concreto de demonstração contra um portal público é o próximo passo.",
+        },
+      ],
+    },
+  },
   {
     slug: "automacao-faturas-santander",
     year: "2025",

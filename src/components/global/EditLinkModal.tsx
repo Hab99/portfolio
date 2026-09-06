@@ -28,6 +28,11 @@ function removeSavedLinkOverride(linkKey: string) {
 }
 
 export default function EditLinkModal() {
+  // Modo de edição só existe em desenvolvimento.
+  if (import.meta.env.PROD) {
+    return null;
+  }
+
   const [open, setOpen] = useState(false);
   const [detail, setDetail] = useState<EditLinkDetail | null>(null);
   const [url, setUrl] = useState("");

@@ -107,8 +107,44 @@ const key = (suffix: string) => `${contentPrefix}.${suffix}`;
             </div>
           ))
         }
+
+        {/* Só aparece nos cases com repositório público. */}
+        {
+          item.repo && (
+            <a
+              href={item.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group mt-2 inline-flex items-center gap-2 border border-accent-500 px-4 py-2 font-mono text-xs uppercase tracking-wide text-accent-400 transition-colors hover:bg-accent-500 hover:text-white"
+            >
+              Ver código no GitHub
+              <span aria-hidden="true" class="transition-transform group-hover:translate-x-0.5">
+                →
+              </span>
+            </a>
+          )
+        }
       </aside>
     </div>
+
+    {/* Diagrama de arquitetura. Emoldurado porque a imagem tem fundo
+        claro e a página é escura — sem a moldura vira um bloco branco
+        estourando na tela. */}
+    {
+      item.imagem && (
+        <figure class="mt-12 overflow-hidden rounded-lg border border-base-200 dark:border-base-800">
+          <img
+            src={item.imagem}
+            alt={`Diagrama de arquitetura — ${item.title}`}
+            width="1600"
+            height="893"
+            loading="lazy"
+            decoding="async"
+            class="w-full"
+          />
+        </figure>
+      )
+    }
 
     <!-- Blocos: Contexto / Processo / Resultado -->
     <div>
@@ -122,7 +158,7 @@ const key = (suffix: string) => `${contentPrefix}.${suffix}`;
                   variant="textXS"
                   class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
                 >
-                  {eyebrow} {String(index + 1).padStart(2, "0")}
+                  {`${eyebrow} ${String(index + 1).padStart(2, "0")}`}
                 </Text>
               </div>
 
