@@ -19,7 +19,7 @@ import { getContent } from "@/lib/getContent";
 const workEyebrowDefault = "Trajetória";
 ---
 
-<section class="scroll-mt-32" id="trabalho">
+<section class="scroll-mt-32" id="experiencia">
   <Wrapper variant="standard" class="py-12 lg:py-24">
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 items-baseline">
       <Text
@@ -35,7 +35,7 @@ const workEyebrowDefault = "Trajetória";
         class="font-semibold leading-tight tracking-tighter lg:col-span-3 text-base-900 dark:text-white"
         data-editable="sections.work.title"
       >
-        {getContent("sections.work.title", "Trabalho")}
+        {getContent("sections.work.title", "Experiência")}
       </Text>
     </div>
 
@@ -43,7 +43,7 @@ const workEyebrowDefault = "Trajetória";
       {
         workItems.map((project) => (
           <a
-            href={`/trabalho/${project.slug}`}
+            href={`/experiencia/${project.slug}`}
             class="group block border-b border-base-200 dark:border-base-800 py-10 transition-colors hover:bg-base-50 dark:hover:bg-base-900/40"
           >
             <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 items-baseline">

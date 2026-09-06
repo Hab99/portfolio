@@ -19,8 +19,8 @@ if (!item) {
 const base = (Astro.site ?? new URL(site.url)).href.replace(/\/$/, "");
 const breadcrumb = [
   { nome: "Início", url: `${base}/` },
-  { nome: "Trabalho", url: `${base}/#trabalho` },
-  { nome: item.title, url: `${base}/trabalho/${item.slug}/` },
+  { nome: "Experiência", url: `${base}/#experiencia` },
+  { nome: item.title, url: `${base}/experiencia/${item.slug}/` },
 ];
 ---
 
@@ -28,8 +28,8 @@ const breadcrumb = [
   <CaseDetail
     item={item}
     contentPrefix={`work.${item.slug}`}
-    backHref="/#trabalho"
-    backLabel="Voltar para Trabalho"
+    backHref="/#experiencia"
+    backLabel="Voltar para Experiência"
     eyebrow="Trajetória"
   />
 </BaseLayout>
