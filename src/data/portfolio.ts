@@ -161,6 +161,46 @@ export const workItems: PortfolioCase[] = [
 
 export const projectItems: PortfolioCase[] = [
   {
+    slug: "rpa-desktop-canal-visual",
+    year: "2026",
+    title: "RPA de desktop com retorno visual",
+    description:
+      "Robô que dirige uma aplicação de terminal isolada, lê o desfecho pela tela e devolve o resultado a uma API. A demonstração roda inteira em qualquer Windows, sem depender de nenhum serviço externo.",
+    category: "Python · PowerShell · PyAutoGUI",
+    repo: "https://github.com/Hab99/rpa-desktop-canal-visual",
+    imagem: "/rpa-desktop-arquitetura.webp",
+    detail: {
+      summary:
+        "Quando a aplicação a automatizar não expõe API, banco, pasta compartilhada nem porta aberta, sobra um único canal: a imagem que ela desenha. Este projeto transforma esse canal em protocolo.",
+      meta: [
+        { label: "Papel", value: "Projeto autoral: arquitetura, código e testes" },
+        { label: "Stack", value: "Python, PowerShell, PyAutoGUI, reconhecimento de imagem" },
+        { label: "Testes", value: "52 testes, sem tela e sem teclado" },
+        { label: "Licença", value: "MIT, código aberto para avaliação" },
+      ],
+      blocks: [
+        {
+          heading: "Contexto",
+          text: "Às vezes a aplicação que precisa ser automatizada roda num ambiente sem API, sem banco acessível, sem pasta compartilhada e sem porta aberta: uma sessão remota, um terminal legado. Não existe canal de integração. Só existe a imagem que ela desenha na tela.",
+          aside:
+            "Quando não há integração possível, a interface deixa de ser detalhe de apresentação e passa a ser a única superfície de contato.",
+        },
+        {
+          heading: "Processo",
+          text: "Se a tela é o único canal, a tela vira o protocolo. A aplicação desenha o desfecho de cada operação como um bloco de borda distinta, e o robô reconhece qual apareceu comparando pixels. Bordas em vez de cor ou texto: cor depende do tema do terminal e texto exigiria OCR, enquanto o formato da moldura sobrevive aos dois. O caminho do arquivo gerado não volta pela tela; os dois lados seguem a mesma convenção de nomes, então o robô o reconstrói sem precisar lê-lo.",
+          aside:
+            "Combinar uma convenção é mais robusto que ler texto de tela por OCR. Quando os dois lados concordam com o padrão, não há o que interpretar errado.",
+        },
+        {
+          heading: "Resultado",
+          text: "Um checkpoint em disco resolve a janela em que o trabalho já foi feito e o servidor ainda não sabe: o registro acontece imediatamente após a digitação, antes de qualquer chamada de rede, com gravação atômica e retentativa. A aplicação alvo, a API de demonstração e o robô estão todos no repositório, então a execução completa não depende de nenhum portal externo. Os 52 testes rodam sem tela e sem teclado, com PyAutoGUI e keyboard entrando como dublês.",
+          aside:
+            "Tempo esgotado não é erro. Sucesso e erro têm blocos próprios; o indefinido é um terceiro caso, que salva print de diagnóstico e força reinício. Tratá-lo como falha marcaria como não feito algo que talvez tenha sido feito.",
+        },
+      ],
+    },
+  },
+  {
     slug: "extrator-documentos-lote",
     year: "2026",
     title: "Extrator de documentos em lote",
