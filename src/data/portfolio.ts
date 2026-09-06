@@ -80,7 +80,7 @@ export const workItems: PortfolioCase[] = [
         {
           heading: "Resultado",
           text: "Automações em produção que sustentam a rotina diária da operação, cobrindo portais bancários, integração entre sistemas sem API e classificação de documentos em lote.",
-          aside: "Números de impacto detalhados por projeto na seção Projetos.",
+          aside: "Os robôs de produção são cobertos por sigilo. Os padrões que uso neles estão reimplementados, do zero e de forma pública, nos projetos abertos.",
         },
       ],
     },
@@ -236,113 +236,6 @@ export const projectItems: PortfolioCase[] = [
           text: "Os padrões deste repositório vêm de um RPA de extração documental que mantenho em produção, processando cerca de 4.700 documentos por dia. Feito à mão, esse volume consumiria a jornada inteira de uma equipe apenas nesta etapa. Aqui os padrões foram reescritos do zero para serem públicos: a suíte de 93 testes roda em 2,45 segundos porque o Playwright é mockado por completo, o que permite testar toda a lógica de orquestração sem depender do portal estar no ar.",
           aside:
             "Estado atual: núcleo, regras de lote e testes completos. O robô concreto de demonstração contra um portal público é o próximo passo.",
-        },
-      ],
-    },
-  },
-  {
-    slug: "automacao-faturas-santander",
-    year: "2025",
-    title: "Automação de faturas em portal bancário",
-    description:
-      "Robô em Selenium que autentica, navega e baixa faturas em lote no portal do Santander, eliminando um gargalo operacional recorrente da equipe.",
-    category: "RPA · Selenium",
-    detail: {
-      summary:
-        "O download de faturas era feito à mão, uma a uma, todo dia. O robô assumiu a tarefa inteira.",
-      meta: [
-        { label: "Papel", value: "Desenvolvimento completo" },
-        { label: "Stack", value: "Python, Selenium, Pandas, Pathlib, Regex" },
-        { label: "Tipo", value: "Automação de portal web" },
-      ],
-      blocks: [
-        {
-          heading: "Contexto",
-          text: "A equipe precisava baixar faturas do portal do Santander manualmente, em volume, todos os dias. Além do tempo consumido, o processo era sujeito a falha humana: fatura pulada, arquivo salvo com nome errado, retrabalho de conferência.",
-          aside:
-            "Portal bancário não oferece API — a única porta de entrada é a interface web.",
-        },
-        {
-          heading: "Processo",
-          text: "Automação em Selenium cobrindo o fluxo completo: autenticação, navegação até a área de faturas, seleção por critério e download em lote com nomenclatura padronizada. A camada de navegação foi isolada da camada de regra de negócio, para que mudança de layout no portal não exija reescrever o robô inteiro.",
-          aside:
-            "Nomenclatura padronizada de arquivo é o que torna o resultado utilizável pelo passo seguinte do processo.",
-        },
-        {
-          heading: "Resultado",
-          text: "O gargalo operacional da equipe foi eliminado: a tarefa passou de execução manual diária para execução automatizada, liberando o time para trabalho de análise.",
-          aside: "Métricas de tempo e volume a detalhar.",
-        },
-      ],
-    },
-  },
-  {
-    slug: "integracao-citrix-pipefy",
-    year: "2025",
-    title: "Ponte entre Citrix e Pipefy",
-    description:
-      "Robô de integração que transporta dados entre um sistema virtualizado em Citrix e o Pipefy — dois ambientes sem qualquer ponto de conexão nativo.",
-    category: "RPA · Integração de sistemas",
-    detail: {
-      summary:
-        "Dois sistemas que não conversam e nenhuma API disponível. A ponte teve que ser construída pela interface.",
-      meta: [
-        { label: "Papel", value: "Desenvolvimento completo" },
-        { label: "Stack", value: "Python, PyAutoGUI, PyWinAuto, Pandas" },
-        { label: "Tipo", value: "Integração entre sistemas sem API" },
-      ],
-      blocks: [
-        {
-          heading: "Contexto",
-          text: "O dado nascia num sistema acessado por Citrix e precisava chegar ao Pipefy. Não havia integração nativa nem API exposta do lado do Citrix. A transferência era feita por pessoas, copiando informação de uma tela para outra.",
-          aside:
-            "Ambiente virtualizado é o cenário mais hostil para automação: não há acesso ao DOM, só pixels numa sessão remota.",
-        },
-        {
-          heading: "Processo",
-          text: "Automação de interface sobre a sessão Citrix, com validação do estado da tela antes de cada ação — em ambiente virtualizado a tela é a única fonte de verdade, e latência de rede pode fazer o robô agir antes de o sistema responder. Do outro lado, envio estruturado dos dados ao Pipefy.",
-          aside:
-            "Cada passo confirma que chegou onde deveria antes de seguir. Sem isso, o robô erra em silêncio.",
-        },
-        {
-          heading: "Resultado",
-          text: "A transferência manual entre os dois sistemas deixou de existir, junto com o risco de erro de digitação que ela carregava.",
-          aside: "Métricas de volume e tempo a detalhar.",
-        },
-      ],
-    },
-  },
-  {
-    slug: "robos-documentos-scpc",
-    year: "2025",
-    title: "Robôs de documentos no SCPC",
-    description:
-      "Dois robôs em Playwright: um coleta comprovantes em PDF, outro classifica e valida documentos a partir de uma planilha de entrada preenchida pela operação.",
-    category: "RPA · Playwright · Documentos",
-    detail: {
-      summary:
-        "Coleta e classificação de documentos em lote, dirigidas por planilha — a operação define o que precisa, o robô executa.",
-      meta: [
-        { label: "Papel", value: "Desenvolvimento completo" },
-        { label: "Stack", value: "Python, Playwright, Pandas, OpenPyXL, Regex" },
-        { label: "Tipo", value: "Coleta e classificação de documentos" },
-      ],
-      blocks: [
-        {
-          heading: "Contexto",
-          text: "Duas necessidades distintas sobre a mesma base: obter comprovantes em PDF no SCPC e, em seguida, classificar e validar esses documentos conforme critérios definidos pela operação.",
-          aside:
-            "Separar em dois robôs em vez de um só: cada um falha e é reexecutado de forma independente.",
-        },
-        {
-          heading: "Processo",
-          text: "Playwright para a navegação, mais resiliente que Selenium em páginas com carregamento assíncrono. A entrada é uma planilha preenchida pela operação, o que mantém o robô dirigido por dados: mudar o escopo do trabalho não exige mexer em código.",
-          aside: "Robô dirigido por dados é robô que a operação consegue usar sozinha.",
-        },
-        {
-          heading: "Resultado",
-          text: "Coleta e classificação passaram a rodar em lote, com critério de validação aplicado de forma consistente — sem variação de interpretação entre pessoas diferentes.",
-          aside: "Métricas de volume e taxa de acerto a detalhar.",
         },
       ],
     },
