@@ -10,7 +10,7 @@ export const site = {
   // --- Identidade ---
   nome: "Guilherme Nascimento Silva",
   nomeCurto: "Guilherme Nascimento",
-  cargo: "Desenvolvedor Python | Automação de Processos",
+  cargo: "Desenvolvedor RPA | Automação | Python",
   local: "São Paulo, Brasil",
 
   // --- Endereço final do site ---
@@ -21,9 +21,9 @@ export const site = {
 
   // --- Texto que aparece no Google e no preview de link ---
   descricao:
-    "Desenvolvedor Python especializado em automação de processos (RPA). " +
-    "Construo robôs que navegam portais bancários, extraem documentos em " +
-    "lote e integram sistemas que não conversam entre si.",
+    "Desenvolvedor RPA com robôs em produção numa operação de BPO jurídico. " +
+    "Automatizo o que não tem API nem DOM: terminal de mainframe dentro do " +
+    "Citrix, portais bancários e documentos em lote.",
 
   // --- Verificação de propriedade no Google Search Console ---
   // Prova ao Google que o site é seu. Não é segredo: fica visível no
@@ -71,12 +71,15 @@ export const perfil = {
   competencias: [
     "Python",
     "Automação de processos (RPA)",
-    "Selenium",
+    "Citrix/VDI",
+    "Terminal de mainframe (IMS/PCOM)",
+    "OpenCV",
+    "Tesseract OCR",
     "Playwright",
-    "Web scraping",
-    "OCR",
-    "Pandas",
-    "Integração de sistemas",
+    "PyAutoGUI",
+    "Power Automate",
+    "SQL Server",
+    "APIs REST",
   ],
 };
 

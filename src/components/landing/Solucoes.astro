@@ -3,7 +3,7 @@ import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 
 /**
- * "O que eu resolvo" — os três problemas que o Guilherme ataca.
+ * "O que eu resolvo" — os quatro problemas que o Guilherme ataca.
  *
  * Vem logo depois da primeira dobra porque responde a pergunta que o
  * recrutador faz antes de olhar projeto: "esse cara serve pra quê?".
@@ -11,21 +11,27 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 const pilares = [
   {
     numero: "01",
-    titulo: "Portais sem API",
+    titulo: "Ambientes sem API e sem DOM",
     texto:
-      "Quando o sistema não oferece integração, a interface vira a porta de entrada. Automação de portais bancários e sistemas web com Selenium e Playwright, isolando navegação de regra de negócio para o robô não quebrar a cada mudança de layout.",
+      "Terminal de mainframe (IMS/PCOM) dentro de sessão Citrix, aplicações legadas de desktop, sistemas virtualizados. Sem DOM para inspecionar e sem banco acessível, a tela é a única superfície de contato: navegação por tecla, âncora visual com OpenCV, leitura por OCR e controle de janelas por chamada nativa à Win32 API.",
   },
   {
     numero: "02",
-    titulo: "Documentos em escala",
+    titulo: "Portais sem integração",
     texto:
-      "Extração, leitura e classificação de documentos em lote com OCR e parsing resiliente. Transformo PDF e imagem em dado estruturado que o processo seguinte consegue consumir.",
+      "Quando o sistema não oferece API, a interface vira a porta de entrada. Automação de portais bancários e sistemas web com Playwright e Selenium, isolando navegação de regra de negócio para o robô não quebrar a cada mudança de layout.",
   },
   {
     numero: "03",
-    titulo: "Sistemas que não conversam",
+    titulo: "Documentos em escala",
     texto:
-      "Integração entre ambientes sem ponto de conexão nativo — incluindo Citrix e outros ambientes virtualizados, onde não há DOM e a tela é a única fonte de verdade.",
+      "Extração, leitura e classificação de documentos em lote com OCR e parsing resiliente. PDF e imagem viram dado estruturado que o processo seguinte consegue consumir — com guarda de duplicados e retomada por checkpoint, porque lote longo é interrompido no meio.",
+  },
+  {
+    numero: "04",
+    titulo: "Robô que fica de pé depois do deploy",
+    texto:
+      "Respondo pela operação diária dos robôs em produção: processamento das cargas de toda a carteira, monitoramento, tratamento das falhas do dia e reprocessamento em lote. Construir e sustentar o mesmo robô muda o que se constrói.",
   },
 ];
 ---

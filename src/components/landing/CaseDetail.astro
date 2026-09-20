@@ -3,6 +3,7 @@ import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import type { PortfolioCase } from "@/data/portfolio";
 import { getContent } from "@/lib/getContent";
+import { site } from "@/data/site";
 
 /**
  * Página de detalhe de um case.
@@ -194,6 +195,56 @@ const key = (suffix: string) => `${contentPrefix}.${suffix}`;
           </section>
         ))
       }
+    </div>
+
+    {/* Convite ao fim do case: quem leu até aqui é o leitor mais qualificado
+        que a página tem. Devolvê-lo apenas com "voltar" desperdiça o melhor
+        momento da visita. */}
+    <div class="mt-16 border-t border-base-200 pt-10 dark:border-base-800 lg:mt-20">
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-8 lg:items-baseline">
+        <Text
+          tag="p"
+          variant="textXS"
+          class="font-mono uppercase tracking-wide text-base-500 dark:text-base-400"
+        >
+          Contato
+        </Text>
+
+        <div class="lg:col-span-2">
+          <Text
+            tag="p"
+            variant="displayXS"
+            class="max-w-md font-semibold leading-snug tracking-tight text-base-900 dark:text-white"
+          >
+            Quer o detalhe técnico que não cabe nesta página?
+          </Text>
+          <Text
+            tag="p"
+            variant="textSM"
+            class="mt-4 max-w-prose text-base-600 dark:text-base-300"
+          >
+            Respondo sobre decisão de arquitetura, trade-off e o que eu faria
+            diferente hoje.
+          </Text>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <a
+            href={`mailto:${site.email}`}
+            class="break-all font-mono text-sm text-base-900 underline decoration-base-300 underline-offset-4 transition-colors hover:text-accent-700 hover:decoration-accent-500 dark:text-white dark:decoration-base-700 dark:hover:text-accent-400"
+          >
+            {site.email}
+          </a>
+          <a
+            href={site.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-mono text-sm text-base-900 underline decoration-base-300 underline-offset-4 transition-colors hover:text-accent-700 hover:decoration-accent-500 dark:text-white dark:decoration-base-700 dark:hover:text-accent-400"
+          >
+            LinkedIn
+          </a>
+        </div>
+      </div>
     </div>
 
     <div class="mt-12 lg:mt-16">

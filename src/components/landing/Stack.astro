@@ -5,26 +5,37 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 /**
  * Stack agrupada por papel, não em lista solta.
  *
- * O último grupo ("Em expansão") é onde o eixo de back-end aparece sem
- * competir com a headline de automação — e sem afirmar domínio que ainda
- * não é defensável numa entrevista.
+ * O último grupo ("Em projeto próprio") separa o que é entrega de produção
+ * do que vive em projeto pessoal. Docker e PostgreSQL ficam ali de
+ * propósito: aparecem para busca, sem afirmar entrega que não houve.
  */
 const grupos = [
   {
-    titulo: "Automação",
-    itens: ["Python", "Selenium", "Playwright", "PyAutoGUI", "PyWinAuto", "Citrix / VDI"],
+    titulo: "Automação e RPA",
+    itens: ["Python", "Power Automate", "Playwright", "Selenium", "PyAutoGUI",
+            "PyWinAuto", "Citrix/VDI", "Win32 API (ctypes)", "Terminal IMS/PCOM"],
   },
   {
-    titulo: "Dados e documentos",
-    itens: ["Pandas", "OpenPyXL", "Tesseract OCR", "Regex", "Web scraping", "Pathlib"],
+    titulo: "Documentos e dados",
+    itens: ["OpenCV", "Tesseract OCR", "Pandas", "OpenPyXL", "Regex", "SQL Server", "SQLite"],
+  },
+  {
+    titulo: "Integrações",
+    itens: ["APIs REST", "FastAPI", "Pydantic", "pyodbc", "Apache Kafka", "Pipefy", "ServiceNow"],
+  },
+  {
+    titulo: "Operação",
+    itens: ["Processamento diário de cargas", "Monitoramento", "Tratamento de falhas",
+            "Reprocessamento em lote", "Logging estruturado", "Documentação técnica"],
   },
   {
     titulo: "Engenharia",
-    itens: ["POO", "SOLID", "Strategy", "Template Method", "Git", "pytest"],
+    itens: ["pytest", "Git", "GitLab CI", "Clean Architecture", "SOLID",
+            "Strategy", "Template Method", "POO"],
   },
   {
-    titulo: "Em expansão",
-    itens: ["FastAPI", "PostgreSQL", "Docker", "CI/CD", "APIs REST"],
+    titulo: "Em projeto próprio",
+    itens: ["Docker", "PostgreSQL"],
   },
 ];
 ---
