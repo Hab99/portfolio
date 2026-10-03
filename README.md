@@ -1,7 +1,7 @@
 # Portfólio — Guilherme Nascimento Silva
 
-Site de portfólio pessoal. Desenvolvedor Python com foco em automação de
-processos (RPA).
+Site de portfólio pessoal. Desenvolvedor RPA em Python: terminal de
+mainframe dentro do Citrix, portais sem API e documentos em lote.
 
 **No ar:** https://guilhermenascimento.vercel.app
 
@@ -16,10 +16,19 @@ processos (RPA).
 | Interatividade| React 19 (apenas onde é necessário)         |
 | Animação      | GSAP + ScrollTrigger                        |
 | Tipografia    | Inter (texto) + JetBrains Mono (metadados)  |
-| Hospedagem    | Vercel, com deploy automático a cada push   |
+| Hospedagem    | Vercel, com deploy automático a cada push na `main` |
 
 O site é **estático**: o build gera HTML pronto, sem servidor de aplicação.
 O visitante recebe arquivos, não uma renderização sob demanda.
+
+---
+
+## Projetos em destaque
+
+| Projeto | Repositório |
+|---|---|
+| RPA de desktop com retorno visual (52 testes) | [rpa-desktop-canal-visual](https://github.com/Hab99/rpa-desktop-canal-visual) |
+| Extrator de documentos em lote (93 testes) | [rpa-extrator-lote](https://github.com/Hab99/rpa-extrator-lote) |
 
 ---
 
@@ -38,6 +47,17 @@ Outros comandos:
 npm run build    # gera o site em dist/
 npm run preview  # serve o dist/ para conferir antes de publicar
 ```
+
+---
+
+## Deploy
+
+Hospedado **somente na Vercel**. A configuração fica em `vercel.json`:
+framework Astro, build com `npm run build`, saída em `dist/` e cache
+imutável de um ano para os arquivos com hash em `/_astro/*`. A versão do
+Node vem de `engines` no `package.json` (22.12 ou superior).
+
+Todo push na `main` publica em produção; branches geram preview.
 
 ---
 
