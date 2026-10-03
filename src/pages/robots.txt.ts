@@ -8,15 +8,15 @@ import { site } from "@/data/site";
  * acompanhe automaticamente o `site.url` — trocar de domínio não exige
  * lembrar de editar um segundo arquivo.
  *
- * As páginas /system/ são referência interna do design system: ficam
- * acessíveis, mas fora do sitemap e fora do índice dos buscadores.
+ * As páginas /system/ ficam fora do sitemap e marcadas com noindex
+ * (Meta.astro). Não entram em Disallow de propósito: bloqueadas aqui,
+ * o buscador não leria o noindex e poderia indexar só a URL.
  */
 export const GET: APIRoute = ({ site: astroSite }) => {
   const base = (astroSite ?? new URL(site.url)).href.replace(/\/$/, "");
 
   const corpo = `User-agent: *
 Allow: /
-Disallow: /system/
 
 Sitemap: ${base}/sitemap-index.xml
 `;

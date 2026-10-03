@@ -12,8 +12,8 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Variáveis de ambiente
-.env
-.env.production
+.env*
+!.env.example
 
 # Arquivos de sistema
 .DS_Store

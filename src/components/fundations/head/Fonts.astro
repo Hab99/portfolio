@@ -1,16 +1,15 @@
-<!--
-  Duas famílias com papéis distintos:
-  - Inter          -> texto corrido, títulos (narra)
-  - JetBrains Mono -> metadados: anos, categorias, e-mail (cataloga)
-
-  O contraste entre as duas é o que cria a harmonia tipográfica.
--->
-<link rel="preconnect" href="https://rsms.me/" />
-<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
-/>
+---
+/**
+ * Duas famílias com papéis distintos:
+ * - Inter          -> texto corrido, títulos (narra)
+ * - JetBrains Mono -> metadados: anos, categorias, e-mail (cataloga)
+ *
+ * O contraste entre as duas é o que cria a harmonia tipográfica.
+ *
+ * Servidas pelo próprio site (Fontsource), não por CDN: o IP do
+ * visitante não vai para terceiros e a CSP fica restrita a 'self'.
+ */
+import "@fontsource-variable/inter/wght.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
+---

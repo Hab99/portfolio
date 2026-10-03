@@ -27,17 +27,26 @@ interface Props {
 }
 
 const { title, description, image, breadcrumb } = Astro.props;
+
+// Modo de edição: só no `astro dev`. No build de produção nada dele é
+// emitido — nem o runtime do React, nem o script inline de overrides.
+// Os textos editados continuam valendo: getContent() os aplica no build.
+const modoEdicao = import.meta.env.DEV;
 ---
 
 <html lang="pt-BR" class="dark scroll-smooth">
   <head>
     <BaseHead {title} {description} {image} {breadcrumb} />
-    <script is:inline define:vars={{ contentOverrides }}>
-      window.__CONTENT_OVERRIDES__ = contentOverrides;
-    </script>
+    {
+      modoEdicao && (
+        <script is:inline define:vars={{ contentOverrides }}>
+          window.__CONTENT_OVERRIDES__ = contentOverrides;
+        </script>
+      )
+    }
   </head>
   <body class="bg-white dark:bg-base-950 min-h-svh">
-    <ApplyContentOverrides />
+    {modoEdicao && <ApplyContentOverrides />}
     <ScrollAnimations />
     <div id="page-content">
       <Navigation />
@@ -45,8 +54,7 @@ const { title, description, image, breadcrumb } = Astro.props;
       <Footer />
       <div aria-hidden="true" class="h-[12vh]"></div>
     </div>
-    <!-- Modo de edição: só existe em desenvolvimento, some no site publicado. -->
-    <EditModeButton client:load />
-    <EditLinkModal client:load />
+    {modoEdicao && <EditModeButton client:load />}
+    {modoEdicao && <EditLinkModal client:load />}
   </body>
 </html>

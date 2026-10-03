@@ -8,7 +8,7 @@
 
 @theme {
   /* Typography */
-  --font-sans: "Inter", sans-serif;
+  --font-sans: "Inter Variable", "Inter", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   /* accent — azul Paramount (#0064FF em accent-500) */
   --color-accent-50: oklch(0.972 0.018 261.1);
